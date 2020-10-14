@@ -1,0 +1,34 @@
+# tasks for Red Hat Familly
+---
+- name: Disable SELinux
+  selinux:
+    state: disabled
+  when: ansible_selinux.status == 'enabled'
+
+- name: Disable dnf mysql module
+  command: dnf module disable mysql -y
+
+- name: Set percona-pxc-57-release repo
+  yum_repository:
+    name: pxc-57-release-x86_64
+    description: pxc-57-release-x86_64
+    baseurl: http://repo.percona.com/pxc-57/yum/release/$releasever/RPMS/x86_64
+    enabled: yes
+    gpgcheck: no
+
+- name: Set percona-prel-release repo
+  yum_repository:
+    name: prel-release-noarch
+    description: prel-release-noarch
+    baseurl: http://repo.percona.com/prel/yum/release/$releasever/RPMS/noarch
+    enabled: yes
+    gpgcheck: no
+
+- name: Set percona-pxb-24-release repo
+  yum_repository:
+    name: percona-pxb-24-release
+    description: percona-pxb-24-release
+    baseurl: http://repo.percona.com/pxb-24/yum/release/$releasever/RPMS/x86_64
+    enabled: yes
+    gpgcheck: no
+...
