@@ -37,7 +37,7 @@
 - name: Create SST user
   mysql_user:
     login_user: "{{ xtradb_root_user }}"
-    login_password: "{{ xtradb_root_password }}"
+    login_unix_socket: /var/lib/mysql/mysql.sock
     user: "{{ xtradb_sst_user }}"
     password: "{{ xtradb_sst_password }}"
     priv: "*.*:grant,reload,lock tables,process,replication client"
